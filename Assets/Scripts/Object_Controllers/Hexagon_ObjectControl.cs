@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Hexagon_ObjectControl : MonoBehaviour
 {
+	//Script Master
+	public GameObject TaskMaster;
+	public string ScriptVerifier;
 
     //Rotates of the squares per frame
     public Rigidbody rb;
@@ -16,22 +19,19 @@ public class Hexagon_ObjectControl : MonoBehaviour
     bool mat1 = true;
     bool mat2 = false;
 
-    //External Functionality
-    public string TargetTag;
-    private SetTrigger ScoreTracker;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        GameObject CheckObj = GameObject.FindWithTag(TargetTag);
-        if (CheckObj != null)
-        {
-            ScoreTracker = CheckObj.GetComponent<SetTrigger>();
-        }
-        if (ScoreTracker == null)
-        {
-            Debug.Log("Cannot find " + TargetTag + "script");
-        }
+		rb = GetComponent<Rigidbody>();
+		startup = false;
+		string pull = TaskMaster.ScriptChecker ();
+		bool result = ScriptVerifier.Equals (pull, System.StringComparison.OrdinalIgnoreCase);
+
+		if (result)
+			continue;
+		else {
+			Debug.LogError("Script Verification Fail: Flat Object Controller");
+		}
     }
 
     void Update()
@@ -63,14 +63,14 @@ public class Hexagon_ObjectControl : MonoBehaviour
             mat1 = false;
             mat2 = true;
             sound.Play();
-            ScoreTracker.IncreaseCount(1);
+			TaskMaster.CountEdit (true);
         }
         else {
             startup = false;
             mat1 = true;
             mat2 = false;
             sound.Play();
-            ScoreTracker.IncreaseCount(-1);
+			TaskMaster.CountEdit (false);
         }
     }
 

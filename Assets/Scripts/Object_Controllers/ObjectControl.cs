@@ -3,54 +3,76 @@ using System.Collections;
 
 public class ObjectControl : MonoBehaviour {
 
-    public GameObject TopTier;
-    public Rigidbody rb;
-    public float yaxis = 2f, xaxis = 2f, zaxis = 3f;       //Rotates of the squares per fram
-    public float speed;
-    private bool startup = false;
-   
-    public Material material1;                              //Material for changing color and effects on click 
-    public Material material2;
-    bool mat1 = true;
-    bool mat2 = false;
-    //public GameObject effects;
+	//Script Master
+	public GameObject TaskMaster;
+	public string ScriptVerifier;
+
+	//Rotates of the squares per frame
+	public Rigidbody rb;
+	public float yaxis = 2f, xaxis = 2f, zaxis = 3f;
+	public float speed;
+	private bool startup = false;
+
+	//Material for changing color and effects on click
+	public Material material1;
+	public Material material2;
+	bool mat1 = true;
+	bool mat2 = false;
+
+	void Start()
+	{
+		rb = GetComponent<Rigidbody>();
+		startup = false;
+		string pull = TaskMaster.ScriptChecker ();
+		bool result = ScriptVerifier.Equals (pull, System.StringComparison.OrdinalIgnoreCase);
+
+		if (result)
+			continue;
+		else {
+			Debug.LogError("Script Verification Fail: Generic Object Controller");
+		}
+	}
+
+	void Update()
+	{
+		Renderer rend = GetComponent<Renderer>();       //Sets the material of the square
+		rend.material = material1;
 
 
-    void Start() {
-        rb = GetComponent<Rigidbody>();
-    }
+		if (startup)
+		{                       //Activates the rotation of the squares on click
+			rb.transform.Rotate(new Vector3(xaxis, yaxis, zaxis) * speed);
+			rend.material = material2;
+		}
+		else if (!startup)
+		{
+			rend.material = material1;
 
-    void Update() {
-        Renderer rend = GetComponent<Renderer>();       //Sets the material of the square
-        rend.material = material1;
+		}
+	}
 
+	void OnMouseDown()
+	{                    //Rotates the squares once they are selected     
 
-        if (startup) {                       //Activates the rotation of the squares on click
-            rb.transform.Rotate(new Vector3(xaxis, yaxis, zaxis) * speed);
-            rend.material = material2;
-        } else if ( !startup ) {
-            rend.material = material1;
-       
-        }
-    }
+		AudioSource sound = GetComponent<AudioSource>();
+		Renderer rend = GetComponent<Renderer>();
 
-    void OnMouseDown() {                    //Rotates the squares once they are selected     
+		if (startup == false)
+		{
+			startup = true;
+			mat1 = false;
+			mat2 = true;
+			sound.Play();
+			TaskMaster.CountEdit (true);
+		}
+		else {
+			startup = false;
+			mat1 = true;
+			mat2 = false;
+			sound.Play();
+			TaskMaster.CountEdit (false);
+		}
+	}
 
-        AudioSource sound = GetComponent<AudioSource>();
-
-        if (startup == false)
-        {
-            startup = true;
-            mat1 = false;
-            mat2 = true;
-            sound.Play();
-        } else {
-            startup = false;
-            mat1 = true;
-            mat2 = false;
-            sound.Play();
-        }         
-    }
-   
 
 }

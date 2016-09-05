@@ -3,6 +3,10 @@ using System.Collections;
 
 public class Isosphere_ObjectControl : MonoBehaviour
 {
+	//Script Master
+	public GameObject TaskMaster;
+	public string ScriptVerifier;
+
     //Rotates of the squares per frame
     public Rigidbody rb;
     public float yaxis = 2f, xaxis = 2f, zaxis = 3f;       
@@ -22,17 +26,16 @@ public class Isosphere_ObjectControl : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+		rb = GetComponent<Rigidbody>();
+		startup = false;
+		string pull = TaskMaster.ScriptChecker ();
+		bool result = ScriptVerifier.Equals (pull, System.StringComparison.OrdinalIgnoreCase);
 
-        GameObject CheckObj = GameObject.FindWithTag(TargetTag);
-        if (CheckObj != null)
-        {
-            ScoreTracker = CheckObj.GetComponent<SetTrigger>();
-        }
-        if (ScoreTracker == null)
-        {
-            Debug.Log("Cannot find " + TargetTag + "script");
-        }
+		if (result)
+			continue;
+		else {
+			Debug.LogError("Script Verification Fail: Isosphere Object Controller");
+		}
     }
 
     void Update()
@@ -65,14 +68,14 @@ public class Isosphere_ObjectControl : MonoBehaviour
             mat1 = false;
             mat2 = true;
             sound.Play();
-            ScoreTracker.IncreaseCount(1);
+			TaskMaster.CountEdit (true);
         }
         else {
             startup = false;
             mat1 = true;
             mat2 = false;
             sound.Play();
-            ScoreTracker.IncreaseCount(-1);
+			TaskMaster.CountEdit (false);
         }
     }
 
