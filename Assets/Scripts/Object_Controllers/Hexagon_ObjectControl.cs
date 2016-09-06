@@ -5,7 +5,6 @@ public class Hexagon_ObjectControl : MonoBehaviour
 {
 	//Script Master
 	public GameObject TaskMaster;
-	public string ScriptVerifier;
 
     //Rotates of the squares per frame
     public Rigidbody rb;
@@ -24,14 +23,7 @@ public class Hexagon_ObjectControl : MonoBehaviour
     {
 		rb = GetComponent<Rigidbody>();
 		startup = false;
-		string pull = TaskMaster.ScriptChecker ();
-		bool result = ScriptVerifier.Equals (pull, System.StringComparison.OrdinalIgnoreCase);
 
-		if (result)
-			continue;
-		else {
-			Debug.LogError("Script Verification Fail: Flat Object Controller");
-		}
     }
 
     void Update()
@@ -63,14 +55,14 @@ public class Hexagon_ObjectControl : MonoBehaviour
             mat1 = false;
             mat2 = true;
             sound.Play();
-			TaskMaster.CountEdit (true);
+			TaskMaster.SendMessage("CountEdit", true);
         }
         else {
             startup = false;
             mat1 = true;
             mat2 = false;
             sound.Play();
-			TaskMaster.CountEdit (false);
+			TaskMaster.SendMessage("CountEdit", false);
         }
     }
 

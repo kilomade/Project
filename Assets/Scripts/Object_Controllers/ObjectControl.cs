@@ -5,7 +5,6 @@ public class ObjectControl : MonoBehaviour {
 
 	//Script Master
 	public GameObject TaskMaster;
-	public string ScriptVerifier;
 
 	//Rotates of the squares per frame
 	public Rigidbody rb;
@@ -19,18 +18,12 @@ public class ObjectControl : MonoBehaviour {
 	bool mat1 = true;
 	bool mat2 = false;
 
+
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>();
 		startup = false;
-		string pull = TaskMaster.ScriptChecker ();
-		bool result = ScriptVerifier.Equals (pull, System.StringComparison.OrdinalIgnoreCase);
 
-		if (result)
-			continue;
-		else {
-			Debug.LogError("Script Verification Fail: Generic Object Controller");
-		}
 	}
 
 	void Update()
@@ -55,7 +48,6 @@ public class ObjectControl : MonoBehaviour {
 	{                    //Rotates the squares once they are selected     
 
 		AudioSource sound = GetComponent<AudioSource>();
-		Renderer rend = GetComponent<Renderer>();
 
 		if (startup == false)
 		{
@@ -63,16 +55,17 @@ public class ObjectControl : MonoBehaviour {
 			mat1 = false;
 			mat2 = true;
 			sound.Play();
-			TaskMaster.CountEdit (true);
+			TaskMaster.SendMessage("CountEdit", true);
 		}
 		else {
 			startup = false;
 			mat1 = true;
 			mat2 = false;
 			sound.Play();
-			TaskMaster.CountEdit (false);
+			TaskMaster.SendMessage("CountEdit", false);
 		}
 	}
+
 
 
 }

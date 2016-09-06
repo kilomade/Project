@@ -4,17 +4,13 @@ using System.Collections;
 public class CheckerScript : MonoBehaviour {
 
 	public GameObject TaskMaster;
-	public string ScriptVerifier;
-	private bool result;
 
-	void Start(){
-		string pull = TaskMaster.ScriptChecker ();
-		result = ScriptVerifier.Equals (pull, System.StringComparison.OrdinalIgnoreCase);
+	// Use this for initialization
+	void Start () {
 	}
-
+	
+	// Update is called once per frame
 	void OnMouseDown(){
-		
-		if (result)
-			TaskMaster.Check ();
+		TaskMaster.SendMessage ("Check", 1);
 	}
 }
