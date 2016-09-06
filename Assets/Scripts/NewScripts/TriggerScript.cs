@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class TriggerScript : MonoBehaviour {
 
@@ -25,6 +26,7 @@ public class TriggerScript : MonoBehaviour {
 	//Interactive object controller
 	public GameObject TargetObject;
 	public GameObject Effect;
+	private Vector3 positionHolder;
 
 	//**************************************************************************************************************
 	//**************************************************************************************************************
@@ -33,7 +35,7 @@ public class TriggerScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		currentActive = 0;
-		Vector3 positionHolder = TargetObject.transform.position;
+		positionHolder = TargetObject.transform.position;
 
 		//Questions if indexes goes beyond 19. Remember to correct the array declaration
 		questionArray[0] = "Gabriela ate 5 slices of pie. Danial ate 2 slices. \n If there were 10 slices of pie, what fraction of pie did Danial eat?";
