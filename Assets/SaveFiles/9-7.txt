@@ -1,0 +1,7 @@
+-Use reallife situations such as bread slices or pie slices
+-Implement the new model suchas as 1/2 * 3/4 
+
+
+I came home 1/2 of loaf of bread on cornter and made a sandwich with 3/4 of it. What fraction of the loaf did I use?
+Use rectangles to represent bread do not curve corners. Use anything with with rectangular and squarish shapes. Do not use 
+circles at lower levels for now. Fine for 5th grade and beyond
