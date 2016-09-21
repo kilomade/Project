@@ -22,3 +22,15 @@ Gabriela ate 3 slices of pie. Danial ate 2 slices.
  Last Answer: 2/6
 
 
+Gabriela ate 3 slices of pie. Danial ate 2 slices. 
+ If there were 6 slices of pie, what fraction of pie did Danial eat?
+ Let's try that again 
+ Last Answer: 2/6
+
+
+Gabriela ate 3 slices of pie. Danial ate 2 slices. 
+ If there were 6 slices of pie, what fraction of pie did Danial eat?
+ Let's try that again 
+ Last Answer: 1/6
+
+
